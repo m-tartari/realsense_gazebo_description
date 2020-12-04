@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+  License:  . See LICENSE file in root directory.
+  Copyright(c) 2020 Michele Tartari All Rights Reserved
+
+  This is the Gazebo URDF model for the Intel RealSense D435 camera
+-->
+<launch>
+
+  <arg name="x" default="0.0"/>
+  <arg name="y" default="0.0"/>
+  <arg name="z" default="0.0"/>
+  <arg name="yaw" default="0.0"/>
+
+  <!-- Start gazebo empty_world-->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="worlds/empty.world"/> <!-- Note: the world_name is with respect to GAZEBO_RESOURCE_PATH environmental variable -->
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="recording" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <!-- Spawn cameras -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find realsense_gazebo_description)/urdf/multicamera.urdf.xacro' " />
+  <node name="spawn_multicamera_model" pkg="gazebo_ros" type="spawn_model" machine="" 
+      args="-x $(arg x)
+            -y $(arg y)
+            -z $(arg z)
+            -Y $(arg yaw)
+            -unpause
+            -urdf
+            -param robot_description
+            -model multicamera"
+  />
+
+  <!-- state publishers -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+</launch>
