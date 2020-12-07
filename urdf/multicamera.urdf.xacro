@@ -5,20 +5,22 @@
 
   <!-- d435  frame definition can be found at https://github.com/IntelRealSense/librealsense/blob/master/doc/d435i.md -->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_d435.urdf.xacro"/>
-  <xacro:sensor_d435 parent="base_link" name="D435_camera" topics_ns="D435_camera">
+  <xacro:sensor_d435  parent="base_link" name="D435_camera" topics_ns="D435_camera"
+                      enable_pointCloud="true" align_depth="true">
     <origin xyz="0.0 -0.5 0.1" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_d435>
 
   <!-- d435i frame definition can be found at https://github.com/IntelRealSense/librealsense/blob/master/doc/d435i.md -->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_d435i.urdf.xacro"/>
-  <xacro:sensor_d435i parent="base_link" name="D435i_camera" topics_ns="D435i_camera">
+  <xacro:sensor_d435i parent="base_link" name="D435i_camera" topics_ns="D435i_camera"
+                      enable_pointCloud="true" align_depth="true">
     <origin xyz="0.0 0.5 0.1" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_d435i>
 
   <!-- t265  frame definition can be found at https://github.com/IntelRealSense/librealsense/blob/master/doc/t265.md -->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_t265.urdf.xacro"/>
-  <xacro:sensor_t265  parent="base_link" name="CL_camera" topics_ns="CL_camera"
-                      xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0">
+  <xacro:sensor_t265  parent="base_link" name="T265_camera" topics_ns="T265_camera"
+                      xyz="0.0 0.0 0.25" rpy="0.0 0.0 0.0">
     <origin xyz="0.0 0.0 0.25" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_t265>
 </robot>
