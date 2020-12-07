@@ -13,7 +13,7 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
 
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <xacro:macro name="gazebo_t265" params="camera_name fisheye1_reference_link fisheye2_reference_link topics_ns fisheye1_optical_frame fisheye2_optical_frame accel_optical_frame gyro_optical_frame pose_frame xyz rpy odom_rate:=200" >
+  <xacro:macro name="gazebo_t265" params="camera_name fisheye1_reference_link fisheye2_reference_link topics_ns fisheye1_optical_frame fisheye2_optical_frame accel_optical_frame gyro_optical_frame pose_frame xyz rpy odom_rate:=200 unite_imu_method:=false">
 
     <!-- Load parameters to model's main link-->
     <gazebo reference="${fisheye1_reference_link}">
@@ -133,39 +133,58 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
           <distortionP2>0.0052825710736215115</distortionP2>
         </plugin>
       </sensor>
-
+      <!-- IMU -->
+      <xacro:if value="${unite_imu_method == 'copy' or unite_imu_method == 'linear_interpolation'}">
+        <sensor name="${camera_name}_imu" type="imu">
+          <always_on>true</always_on>
+          <update_rate>300</update_rate>
+          <topic>${camera_name}/imu/sample</topic>
+          <plugin name="{camera_name}imu" filename="libgazebo_ros_imu_sensor.so">
+            <topicName>${camera_name}/imu/sample</topicName>
+            <bodyName>${camera_name}_pose_frame</bodyName>
+            <frameName>${gyro_optical_frame}</frameName>
+            <updateRateHZ>300</updateRateHZ>
+            <gaussianNoise>0.1</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+          </plugin>
+        </sensor>
+      </xacro:if>
       <!-- Accel and gyro -->
-      <sensor name="{camera_name}accel" type="imu">
-        <always_on>true</always_on>
-        <update_rate>300</update_rate>
-        <topic>${topics_ns}/accel/sample</topic>
-        <plugin name="${topics_ns}_accel_plugin" filename="librealsense_gazebo_accel_sensor.so">
-          <topicName>${camera_name}/accel/sample</topicName>
-          <bodyName>imu_accel_link</bodyName>
-          <updateRateHZ>300.0</updateRateHZ>
-          <gaussianNoise>0.1</gaussianNoise>
-          <xyzOffset>0 0 0</xyzOffset>
-          <rpyOffset>0 0 0</rpyOffset>
-          <frameName>${accel_optical_frame}</frameName>
-        </plugin>
-        <pose>0 0 0 0 0 0</pose>
-      </sensor>
-      <sensor name="{camera_name}gyro" type="imu">
-        <pose>0 0 0 0 0 0</pose>
-        <always_on>true</always_on>
-        <update_rate>300</update_rate>
-        <topic>${topics_ns}/gyro/sample</topic>
-        <plugin name="${topics_ns}_gyro_plugin" filename="librealsense_gazebo_gyro_sensor.so">
-          <topicName>${camera_name}/gyro/sample</topicName>
-          <bodyName>imu_gyro_link</bodyName>
-          <updateRateHZ>300.0</updateRateHZ>
-          <gaussianNoise>0.1</gaussianNoise>
-          <xyzOffset>0 0 0</xyzOffset>
-          <rpyOffset>0 0 0</rpyOffset>
-          <frameName>${gyro_optical_frame}</frameName>
-        </plugin>
-      </sensor>
+      <xacro:unless value="${unite_imu_method == 'copy' or unite_imu_method == 'linear_interpolation'}">
+        <sensor name="{camera_name}accel" type="imu">
+          <always_on>true</always_on>
+          <update_rate>300</update_rate>
+          <plugin name="${topics_ns}_accel_plugin" filename="librealsense_gazebo_accel_sensor.so">
+            <topicName>${camera_name}/accel/sample</topicName>
+            <bodyName>${camera_name}_pose_frame</bodyName>
+            <updateRateHZ>300.0</updateRateHZ>
+            <gaussianNoise>0.1</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <frameName>${accel_optical_frame}</frameName>
+            <initialOrientationAsReference>false</initialOrientationAsReference>
+          </plugin>
+          <pose>0 0 0 0 0 0</pose>
+        </sensor>
+        <sensor name="{camera_name}gyro" type="imu">
+          <always_on>true</always_on>
+          <update_rate>300</update_rate>
+          <topic>${topics_ns}/gyro/sample</topic>
+          <plugin name="${topics_ns}_gyro_plugin" filename="librealsense_gazebo_gyro_sensor.so">
+            <topicName>${camera_name}/gyro/sample</topicName>
+            <bodyName>${camera_name}_pose_frame</bodyName>
+            <updateRateHZ>300.0</updateRateHZ>
+            <gaussianNoise>0.1</gaussianNoise>
+            <xyzOffset>0 0 0</xyzOffset>
+            <rpyOffset>0 0 0</rpyOffset>
+            <frameName>${gyro_optical_frame}</frameName>
+            <initialOrientationAsReference>false</initialOrientationAsReference>
+          </plugin>
+        </sensor>
+      </xacro:unless>
     </gazebo>
+
     <gazebo>
       <!-- Odom from SLAM -->
       <plugin name="p3d_base_controller" filename="libgazebo_ros_p3d.so">

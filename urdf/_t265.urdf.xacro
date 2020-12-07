@@ -18,7 +18,7 @@ aluminum peripherial evaluation case.
 
   <!-- tx,ty,tz,rr,rp,ry (xyz rpy) are the transformation from the robot base_link to the camera reference frame (camerea_pose_frame) 
   they are needed for the simulation of the camera slam capabilities -->
-  <xacro:macro name="sensor_t265" params="parent xyz rpy name:=camera topics_ns:=camera odom_rate:=200 *origin">
+  <xacro:macro name="sensor_t265" params="parent xyz rpy name:=camera topics_ns:=camera odom_rate:=200 unite_imu_method:=false *origin">
     <xacro:property name="M_PI" value="3.1415926535897931"/>
 
     <!-- The following values are approximate, and the camera node
@@ -142,6 +142,7 @@ aluminum peripherial evaluation case.
                         odom_rate="${odom_rate}"
                         xyz="${xyz}" 
                         rpy="${rpy}"
+                        unite_imu_method="${unite_imu_method}"
     />
     <!--
                         xyz="${tx} ${ty} ${tz}" 
