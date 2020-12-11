@@ -20,7 +20,7 @@ This is the Gazebo URDF model for the Intel RealSense D435 camera
       <self_collide>0</self_collide>
       <enable_wind>0</enable_wind>
       <kinematic>0</kinematic>
-      <gravity>1</gravity>
+      <!-- <gravity>1</gravity> -->
       <!--<mu>1</mu>-->
       <mu2>1</mu2>
       <fdir1>0 0 0</fdir1>
