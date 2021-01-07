@@ -10,14 +10,16 @@ In the urdf file where you want to use the simulated realsense add the following
 ```xml
   <!-- d435 frame definition can be found at https://github.com/IntelRealSense/librealsense/blob/master/doc/d435i.md -->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_d435.urdf.xacro"/>
-  <xacro:sensor_d435 parent="base_link" name="D435_camera" topics_ns="D435_camera">
+  <xacro:sensor_d435  parent="base_link" name="D435_camera" topics_ns="D435_camera"
+                      enable_pointCloud="true" align_depth="true">
     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_d435>
 
   <!-- d435i frame definition can be found at https://github.com/IntelRealSense/librealsense/blob/master/doc/d435i.md -->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_d435i.urdf.xacro"/>
   <xacro:sensor_d435i parent="base_link" name="D435i_camera" topics_ns="D435i_camera"
-                      enable_pointCloud="true" unite_imu_method="false"> <!-- unite_imu_method can be false, copy or linear_interpolation -->
+                      enable_pointCloud="true" align_depth="true"
+                      unite_imu_method="false"> <!-- unite_imu_method can be false, copy or linear_interpolation -->
     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_d435i>
 
@@ -31,8 +33,7 @@ In the urdf file where you want to use the simulated realsense add the following
   </xacro:sensor_t265>
 ```
 
-You can run an example on Gazebo using:
+**Note 1:** T
+as described in the offical [IntelRealSense/realsense-ros/README.md](https://github.com/IntelRealSense/realsense-ros/blob/development/README.md) when the param ```align_depth``` is set true, the topics ```/camera/aligned_depth_to_color/image_raw``` and ```/camera/aligned_depth_to_color/camera_info``` are added. However, to lighten the simulation (differently for the real camera), the topics ```/camera/depth/image_rect_raw``` and ```/camera/depth/camera_info``` are removed when this happens.
 
-```shell
-roslaunch realsense_gazebo_description multicamera.launch
-```
+**Note 2:** You can launch an example on Gazebo using: ```roslaunch realsense_gazebo_description multicamera.launch```

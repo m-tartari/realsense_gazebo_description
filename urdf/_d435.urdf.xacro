@@ -2,7 +2,7 @@
 
 <!--
 Aknolegment: This file was copied from the realsense repository of 
-pal-robotics-forks( https://github.com/pal-robotics-forks/realsense/ )
+pal-robotics-forks( https://github.com/pal-robotics-forks/realsense/ ).
 and then modified.
 
 License: Apache 2.0. See LICENSE file in root directory.
@@ -16,7 +16,7 @@ aluminum peripherial evaluation case.
   <!--File includes-->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_d435.gazebo.xacro"/>
 
-  <xacro:macro name="sensor_d435" params="name:=camera topics_ns:=camera parent *origin">
+  <xacro:macro name="sensor_d435" params="name:=camera topics_ns:=camera parent enable_pointCloud:=false align_depth:=false *origin">
     <xacro:property name="M_PI" value="3.1415926535897931"/>
   
     <!-- The following values are approximate, and the camera node
@@ -143,13 +143,15 @@ aluminum peripherial evaluation case.
     <link name="${name}_color_optical_frame"/>
 
     <!-- Realsense Gazebo Plugin -->
-    <xacro:gazebo_d435  camera_name="${name}" 
-                        reference_link="${name}_link" 
-                        topics_ns="${topics_ns}" 
-                        depth_optical_frame="${name}_depth_optical_frame" 
-                        color_optical_frame="${name}_color_optical_frame" 
-                        infrared1_optical_frame="${name}_left_ir_optical_frame" 
+    <xacro:gazebo_d435  camera_name="${name}"
+                        topics_ns="${topics_ns}"
+                        reference_link="${name}_link"
+                        depth_optical_frame="${name}_depth_optical_frame"
+                        color_optical_frame="${name}_color_optical_frame"
+                        infrared1_optical_frame="${name}_left_ir_optical_frame"
                         infrared2_optical_frame="${name}_right_ir_optical_frame"
+                        enable_pointCloud="${enable_pointCloud}"
+                        align_depth="${align_depth}"
     />
 
   </xacro:macro>

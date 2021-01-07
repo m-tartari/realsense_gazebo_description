@@ -11,6 +11,7 @@
   <arg name="y" default="0.0"/>
   <arg name="z" default="0.0"/>
   <arg name="yaw" default="0.0"/>
+  <arg name="align_depth" default="true"/>
 
   <!-- Start gazebo empty_world-->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
