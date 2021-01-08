@@ -16,7 +16,25 @@ aluminum peripherial evaluation case.
   <!--File includes-->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_d435.gazebo.xacro"/>
 
-  <xacro:macro name="sensor_d435" params="name:=camera topics_ns:=camera parent enable_pointCloud:=false align_depth:=false *origin">
+  <xacro:macro name="sensor_d435" params="parent
+                                          name:=camera
+                                          topics_ns:=camera
+                                          align_depth:=false
+                                          enable_pointCloud:=false
+
+                                          depth_width:=1280
+                                          depth_height:=720
+                                          depth_fps:=30
+
+                                          infra_width:=640
+                                          infra_height:=480
+                                          infra_fps:=30
+
+                                          color_width:=1920
+                                          color_height:=1080
+                                          color_fps:=30
+
+                                          *origin">
     <xacro:property name="M_PI" value="3.1415926535897931"/>
   
     <!-- The following values are approximate, and the camera node
@@ -146,12 +164,25 @@ aluminum peripherial evaluation case.
     <xacro:gazebo_d435  camera_name="${name}"
                         topics_ns="${topics_ns}"
                         reference_link="${name}_link"
+
                         depth_optical_frame="${name}_depth_optical_frame"
+                        depth_width="${depth_width}"
+                        depth_height="${depth_height}"
+                        depth_fps="${depth_fps}"
+
                         color_optical_frame="${name}_color_optical_frame"
+                        color_width="${color_width}"
+                        color_height="${color_height}"
+                        color_fps="${color_fps}"
+
                         infrared1_optical_frame="${name}_left_ir_optical_frame"
                         infrared2_optical_frame="${name}_right_ir_optical_frame"
-                        enable_pointCloud="${enable_pointCloud}"
+                        infra_width="${infra_width}"
+                        infra_height="${infra_height}"
+                        infra_fps="${infra_fps}"
+
                         align_depth="${align_depth}"
+                        enable_pointCloud="${enable_pointCloud}"
     />
 
   </xacro:macro>

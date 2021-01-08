@@ -11,7 +11,6 @@
   <arg name="y" default="0.0"/>
   <arg name="z" default="0.0"/>
   <arg name="yaw" default="0.0"/>
-  <arg name="align_depth" default="true"/>
 
   <!-- Start gazebo empty_world-->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
@@ -24,7 +23,7 @@
   </include>
 
   <!-- Spawn cameras -->
-  <param name="robot_description" command="$(find xacro)/xacro '$(find realsense_gazebo_description)/urdf/multicamera.urdf.xacro' " />
+  <param name="robot_description" command="$(find xacro)/xacro '$(find realsense_gazebo_description)/urdf/multicamera.urdf.xacro'"/>
   <node name="spawn_multicamera_model" pkg="gazebo_ros" type="spawn_model" machine="" 
       args="-x $(arg x)
             -y $(arg y)

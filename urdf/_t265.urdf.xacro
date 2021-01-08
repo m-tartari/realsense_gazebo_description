@@ -3,22 +3,40 @@
 <!--
 Aknolegment: This file was copied from the realsense repository of 
 pal-robotics-forks( https://github.com/pal-robotics-forks/realsense/ ).
-Lines 17,47,54 were then modified.
+and then modified.
 
 License: Apache 2.0. See LICENSE file in root directory.
 Copyright(c) 2017 Intel Corporation. All Rights Reserved
 
 This is the URDF model for the Intel RealSense T265 camera, in it's
 aluminum peripherial evaluation case.
+
+The camera specs can be found at https://www.intelrealsense.com/how-to-getting-imu-data-from-d435i-and-t265/ .
 -->
 
 <robot name="sensor_t265" xmlns:xacro="http://ros.org/wiki/xacro">
   <!--File includes-->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_t265.gazebo.xacro"/>
 
-  <!-- tx,ty,tz,rr,rp,ry (xyz rpy) are the transformation from the robot base_link to the camera reference frame (camerea_pose_frame) 
+    <!-- odom_xyz, odom_rpy params are the transformation from the robot base_link to the camera reference frame (camerea_pose_frame) 
   they are needed for the simulation of the camera slam capabilities -->
-  <xacro:macro name="sensor_t265" params="parent xyz rpy name:=camera topics_ns:=camera odom_rate:=200 unite_imu_method:=false *origin">
+  <xacro:macro name="sensor_t265" params="parent
+                                          name:=camera
+                                          topics_ns:=camera
+
+                                          unite_imu_method:=false
+                                          accel_fps:=62.5
+                                          gyro_fps:=200
+
+                                          fisheye_width:=848
+                                          fisheye_height:=800
+                                          fisheye_fps:=30
+
+                                          odom_xyz
+                                          odom_rpy
+                                          odom_fps:=262
+
+                                          *origin">
     <xacro:property name="M_PI" value="3.1415926535897931"/>
 
     <!-- The following values are approximate, and the camera node
@@ -130,26 +148,26 @@ aluminum peripherial evaluation case.
     <link name="${name}_gyro_optical_frame"/>
 
     <!-- Realsense Gazebo Plugin -->
-    <xacro:gazebo_t265  camera_name="${name}"
-                        topics_ns="${topics_ns}"
-                        pose_frame="${name}_pose_frame"
+    <xacro:gazebo_t265  camera_name="${name}" topics_ns="${topics_ns}"
                         fisheye1_reference_link="${name}_fisheye1_rgb_frame"
                         fisheye2_reference_link="${name}_fisheye2_rgb_frame"
                         fisheye1_optical_frame="${name}_fisheye1_optical_frame"
                         fisheye2_optical_frame="${name}_fisheye2_optical_frame"
+                        fisheye_width="${fisheye_width}"
+                        fisheye_height="${fisheye_height}"
+                        fisheye_fps="${fisheye_fps}"
+
                         accel_optical_frame="${name}_accel_optical_frame"
                         gyro_optical_frame="${name}_gyro_optical_frame"
-                        odom_rate="${odom_rate}"
-                        xyz="${xyz}" 
-                        rpy="${rpy}"
                         unite_imu_method="${unite_imu_method}"
-    />
-    <!--
-                        xyz="${tx} ${ty} ${tz}" 
-                        rpy="${rr + M_PI} ${rp} ${ry + M_PI}"
-    />
-    -->
+                        accel_fps="${accel_fps}"
+                        gyro_fps="${gyro_fps}"
 
+                        pose_frame="${name}_pose_frame"
+                        odom_xyz="${odom_xyz}" 
+                        odom_rpy="${odom_rpy}"
+                        odom_fps="${odom_fps}"
+    />
   </xacro:macro>
 
 </robot>

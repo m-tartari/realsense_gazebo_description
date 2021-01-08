@@ -16,7 +16,29 @@ aluminum peripherial evaluation case.
   <!--File includes-->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_d435i.gazebo.xacro"/>
 
-  <xacro:macro name="sensor_d435i" params="name:=camera topics_ns:=camera parent enable_pointCloud:=false align_depth:=false unite_imu_method:=false *origin">
+  <xacro:macro name="sensor_d435i" params="parent
+                                          name:=camera
+                                          topics_ns:=camera
+                                          align_depth:=false
+                                          enable_pointCloud:=true
+                                          
+                                          unite_imu_method:=false
+                                          accel_fps:=250
+                                          gyro_fps:=400
+
+                                          depth_width:=1280
+                                          depth_height:=720
+                                          depth_fps:=30
+
+                                          infra_width:=640
+                                          infra_height:=480
+                                          infra_fps:=30
+
+                                          color_width:=1920
+                                          color_height:=1080
+                                          color_fps:=30
+
+                                          *origin">
     <xacro:property name="M_PI" value="3.1415926535897931"/>
   
     <!-- The following values are approximate, and the camera node
