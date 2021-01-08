@@ -36,6 +36,7 @@ This is the Gazebo URDF model for the Intel RealSense D435 camera
 
                                           align_depth:=false
                                           enable_pointCloud:=false
+                                          visualize:=false
                                           ">
 
     <!-- Load parameters to model's main link-->
@@ -74,7 +75,7 @@ This is the Gazebo URDF model for the Intel RealSense D435 camera
         </camera>
         <always_on>1</always_on>
         <update_rate>${color_fps}</update_rate>
-        <visualize>1</visualize>
+        <visualize>${visualize}</visualize>
       </sensor>
       <sensor name="${camera_name}ired1" type="camera">
         <camera name="${camera_name}">
@@ -96,7 +97,7 @@ This is the Gazebo URDF model for the Intel RealSense D435 camera
         </camera>
         <always_on>1</always_on>
         <update_rate>${infra_fps}</update_rate>
-        <visualize>0</visualize>
+        <visualize>false</visualize>
       </sensor>
       <sensor name="${camera_name}ired2" type="camera">
         <camera name="${camera_name}">
@@ -118,7 +119,7 @@ This is the Gazebo URDF model for the Intel RealSense D435 camera
         </camera>
         <always_on>1</always_on>
         <update_rate>${infra_fps}</update_rate>
-        <visualize>0</visualize>
+        <visualize>false</visualize>
       </sensor>
       <sensor name="${camera_name}depth" type="depth">
         <camera name="${camera_name}">
@@ -139,7 +140,7 @@ This is the Gazebo URDF model for the Intel RealSense D435 camera
         </camera>
         <always_on>1</always_on>
         <update_rate>${depth_fps}</update_rate>
-        <visualize>0</visualize>
+        <visualize>false</visualize>
       </sensor>
     </gazebo>
 

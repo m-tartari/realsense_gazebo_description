@@ -34,6 +34,7 @@ aluminum peripherial evaluation case.
                                           color_height:=1080
                                           color_fps:=30
 
+                                          visualize:=false
                                           *origin">
     <xacro:property name="M_PI" value="3.1415926535897931"/>
   
@@ -181,8 +182,9 @@ aluminum peripherial evaluation case.
                         infra_height="${infra_height}"
                         infra_fps="${infra_fps}"
 
-                        align_depth="${align_depth}"
                         enable_pointCloud="${enable_pointCloud}"
+                        align_depth="${align_depth}"
+                        visualize="${visualize}"
     />
 
   </xacro:macro>

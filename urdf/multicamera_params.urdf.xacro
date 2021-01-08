@@ -8,6 +8,7 @@
   <xacro:sensor_d435  parent="base_link" name="D435_camera" topics_ns="D435_camera"
                       enable_pointCloud="false"
                       align_depth="false"
+                      visualize:="false"
 
                       depth_width="1280"
                       depth_height="720"
@@ -21,7 +22,7 @@
                       color_height="1080"
                       color_fps="30"
                       >
-    <origin xyz="0.0 -0.5 0.1" rpy="0.0 0.0 0.0"/>
+    <origin xyz="0.0 -0.5 0.0" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_d435>
 
   <!-- d435i frame definition can be found at https://github.com/IntelRealSense/librealsense/blob/master/doc/d435i.md -->
@@ -30,6 +31,7 @@
   <xacro:sensor_d435i parent="base_link" name="D435i_camera" topics_ns="D435i_camera"
                       enable_pointCloud="true"
                       align_depth="false"
+                      visualize:="false"
 
                       unite_imu_method="false"
                       accel_fps="250"
@@ -47,7 +49,7 @@
                       color_height="1080"
                       color_fps="30"
                       > 
-    <origin xyz="0.0 0.5 0.1" rpy="0.0 0.0 0.0"/>
+    <origin xyz="0.0 0.5 0.0" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_d435i>
 
   <!-- t265  frame definition can be found at https://github.com/IntelRealSense/librealsense/blob/master/doc/t265.md -->
@@ -67,6 +69,21 @@
                       accel_fps="62.5"
                       gyro_fps="200"
                       >
-    <origin xyz="0.0 0.0 0.25" rpy="0.0 0.0 0.0"/>
+    <origin xyz="0.0 0.0 0.15" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_t265>
+
+  <!-- add a cone, just to have something to see -->
+  <joint name="cone_joint" type="fixed">
+          <parent link="base_link"/>
+          <child link="cone_link"/>
+          <origin xyz="4 0 0" rpy="0 0 0"/>
+  </joint>
+  <link name='cone_link'>
+    <visual>
+      <geometry>
+        <mesh filename="model://construction_cone/meshes/construction_cone.dae" scale="10 10 10"/>
+      </geometry>
+    </visual>
+  </link>
+
 </robot>

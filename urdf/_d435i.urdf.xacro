@@ -19,6 +19,7 @@ aluminum peripherial evaluation case.
   <xacro:macro name="sensor_d435i" params="parent
                                           name:=camera
                                           topics_ns:=camera
+                                          visualize:=false
                                           align_depth:=false
                                           enable_pointCloud:=true
                                           
@@ -207,6 +208,7 @@ aluminum peripherial evaluation case.
                         enable_pointCloud="${enable_pointCloud}"
                         unite_imu_method="${unite_imu_method}"
                         align_depth="${align_depth}"
+                        visualize="${visualize}"
     />
 
   </xacro:macro>
