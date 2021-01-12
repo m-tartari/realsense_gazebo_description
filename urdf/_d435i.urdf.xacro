@@ -21,7 +21,7 @@ aluminum peripherial evaluation case.
                                           topics_ns:=camera
                                           visualize:=false
                                           align_depth:=false
-                                          enable_pointCloud:=true
+                                          enable_pointCloud:=false
                                           
                                           unite_imu_method:=false
                                           accel_fps:=250
@@ -199,12 +199,28 @@ aluminum peripherial evaluation case.
     <xacro:gazebo_d435i camera_name="${name}"
                         topics_ns="${topics_ns}"
                         reference_link="${name}_link"
+
                         depth_optical_frame="${name}_depth_optical_frame"
+                        depth_width="${depth_width}"
+                        depth_height="${depth_height}"
+                        depth_fps="${depth_fps}"
+
                         color_optical_frame="${name}_color_optical_frame"
+                        color_width="${color_width}"
+                        color_height="${color_height}"
+                        color_fps="${color_fps}"
+
                         infrared1_optical_frame="${name}_left_ir_optical_frame"
                         infrared2_optical_frame="${name}_right_ir_optical_frame"
+                        infra_width="${infra_width}"
+                        infra_height="${infra_height}"
+                        infra_fps="${infra_fps}"
+
                         accel_optical_frame="${name}_accel_optical_frame"
                         gyro_optical_frame="${name}_gyro_optical_frame"
+                        accel_fps="${accel_fps}"
+                        gyro_fps="${gyro_fps}"
+
                         enable_pointCloud="${enable_pointCloud}"
                         unite_imu_method="${unite_imu_method}"
                         align_depth="${align_depth}"
