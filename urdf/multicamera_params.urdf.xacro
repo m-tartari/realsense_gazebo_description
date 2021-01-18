@@ -8,7 +8,7 @@
   <xacro:sensor_d435  parent="base_link" name="D435_camera" topics_ns="D435_camera"
                       enable_pointCloud="false"
                       align_depth="false"
-                      visualize:="false"
+                      visualize="false"
 
                       depth_width="1280"
                       depth_height="720"
@@ -31,7 +31,7 @@
   <xacro:sensor_d435i parent="base_link" name="D435i_camera" topics_ns="D435i_camera"
                       enable_pointCloud="true"
                       align_depth="false"
-                      visualize:="false"
+                      visualize="false"
 
                       unite_imu_method="false"
                       accel_fps="250"
@@ -48,7 +48,7 @@
                       color_width="1920"
                       color_height="1080"
                       color_fps="30"
-                      > 
+                      >
     <origin xyz="0.0 0.5 0.0" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_d435i>
 
