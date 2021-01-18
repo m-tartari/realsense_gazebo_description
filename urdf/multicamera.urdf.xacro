@@ -6,22 +6,23 @@
   <!-- d435  frame definition can be found at https://github.com/IntelRealSense/librealsense/blob/master/doc/d435i.md -->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_d435.urdf.xacro"/>
   <xacro:sensor_d435  parent="base_link" name="D435_camera" topics_ns="D435_camera" visualize="true">
-    <origin xyz="0.0 -0.5 0" rpy="0.0 0.0 0.0"/>
+    <origin xyz="0.0 -0.5 0.0" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_d435>
 
   <!-- d435i frame definition can be found at https://github.com/IntelRealSense/librealsense/blob/master/doc/d435i.md -->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_d435i.urdf.xacro"/>
-  <xacro:sensor_d435i parent="base_link" name="D435i_camera" topics_ns="D435i_camera"> 
-    <origin xyz="0.0 0.5 0" rpy="0.0 0.0 0.0"/>
+  <xacro:sensor_d435i parent="base_link" name="D435i_camera" topics_ns="D435i_camera">
+    <origin xyz="0.0 0.5 0.0" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_d435i>
 
   <!-- t265  frame definition can be found at https://github.com/IntelRealSense/librealsense/blob/master/doc/t265.md -->
+  <!-- odom_xyz and odom_rpy paramenters are used as a base for odometry, they represent the trasformation from the robot
+       base_link. unite_imu_method can be "false", "copy" or "linear_interpolation" -->
   <xacro:include filename="$(find realsense_gazebo_description)/urdf/_t265.urdf.xacro"/>
   <xacro:sensor_t265  parent="base_link" name="T265_camera" topics_ns="T265_camera"
                       odom_xyz="0.0 0.0 0.25" odom_rpy="0.0 0.0 0.0">
     <origin xyz="0.0 0.0 0.15" rpy="0.0 0.0 0.0"/>
   </xacro:sensor_t265>
-
 
   <!-- add a cone, just to have something to see -->
   <joint name="cone_joint" type="fixed">
@@ -36,5 +37,5 @@
       </geometry>
     </visual>
   </link>
-  
+
 </robot>

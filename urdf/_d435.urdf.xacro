@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 
 <!--
-Aknolegment: This file was copied from the realsense repository of 
+Aknolegment: This file was copied from the realsense repository of
 pal-robotics-forks( https://github.com/pal-robotics-forks/realsense/ ).
 and then modified.
 
@@ -22,6 +22,7 @@ aluminum peripherial evaluation case.
                                           align_depth:=false
                                           enable_pointCloud:=false
 
+                                          clip_distance:=-1.0
                                           depth_width:=1280
                                           depth_height:=720
                                           depth_fps:=30
@@ -37,21 +38,21 @@ aluminum peripherial evaluation case.
                                           visualize:=false
                                           *origin">
     <xacro:property name="M_PI" value="3.1415926535897931"/>
-  
+
     <!-- The following values are approximate, and the camera node
      publishing TF values with actual calibrated camera extrinsic values -->
     <xacro:property name="d435_cam_depth_to_left_ir_offset" value="0.0"/>
     <xacro:property name="d435_cam_depth_to_right_ir_offset" value="-0.050"/>
     <xacro:property name="d435_cam_depth_to_color_offset" value="0.015"/>
-  
+
     <!-- The following values model the aluminum peripherial case for the
-  	D435 camera, with the camera joint represented by the actual 
+  	D435 camera, with the camera joint represented by the actual
   	peripherial camera tripod mount -->
     <xacro:property name="d435_cam_width" value="0.090"/>
     <xacro:property name="d435_cam_height" value="0.025"/>
     <xacro:property name="d435_cam_depth" value="0.02505"/>
     <xacro:property name="d435_cam_mount_from_center_offset" value="0.0149"/>
-  
+
     <!-- The following offset is relative the the physical D435 camera peripherial
   	camera tripod mount -->
     <xacro:property name="d435_cam_depth_px" value="${d435_cam_mount_from_center_offset}"/>
@@ -100,7 +101,7 @@ aluminum peripherial evaluation case.
         <inertia ixx="0.003881243" ixy="0.0" ixz="0.0" iyy="0.000498940" iyz="0.0" izz="0.003879257"/>
       </inertial>
     </link>
-   
+
     <!-- camera depth joints and links -->
     <joint name="${name}_depth_joint" type="fixed">
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -115,7 +116,7 @@ aluminum peripherial evaluation case.
       <child link="${name}_depth_optical_frame"/>
     </joint>
     <link name="${name}_depth_optical_frame"/>
-      
+
     <!-- camera left IR joints and links -->
     <joint name="${name}_left_ir_joint" type="fixed">
       <origin xyz="0 ${d435_cam_depth_to_left_ir_offset} 0" rpy="0 0 0"/>
@@ -183,6 +184,7 @@ aluminum peripherial evaluation case.
                         infra_fps="${infra_fps}"
 
                         enable_pointCloud="${enable_pointCloud}"
+                        clip_distance="${clip_distance}"
                         align_depth="${align_depth}"
                         visualize="${visualize}"
     />
