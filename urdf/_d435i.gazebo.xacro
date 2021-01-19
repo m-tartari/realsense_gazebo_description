@@ -174,9 +174,9 @@ This is the Gazebo URDF model for the Intel RealSense D435i camera
         <sensor name="${camera_name}imu" type="imu">
           <always_on>true</always_on>
           <update_rate>${gyro_fps}</update_rate>
-          <topic>${camera_name}/imu/sample</topic>
+          <topic>${topics_ns}/imu/sample</topic>
           <plugin name="{camera_name}imu" filename="libgazebo_ros_imu_sensor.so">
-            <topicName>${camera_name}/imu/sample</topicName>
+            <topicName>${topics_ns}/imu/sample</topicName>
             <bodyName>${camera_name}_link</bodyName>
             <frameName>${gyro_optical_frame}</frameName>
             <updateRateHZ>${gyro_fps}</updateRateHZ>
@@ -191,9 +191,9 @@ This is the Gazebo URDF model for the Intel RealSense D435i camera
         <sensor name="{camera_name}accel" type="imu">
           <always_on>true</always_on>
           <update_rate>${accel_fps}</update_rate>
-          <topic>${camera_name}/accel/sample</topic>
+          <topic>${topics_ns}/accel/sample</topic>
           <plugin name="${topics_ns}_accel_plugin" filename="librealsense_gazebo_accel_sensor.so">
-            <topicName>${camera_name}/accel/sample</topicName>
+            <topicName>${topics_ns}/accel/sample</topicName>
             <bodyName>${camera_name}_link</bodyName>
             <updateRateHZ>${accel_fps}</updateRateHZ>
             <gaussianNoise>0.1</gaussianNoise>
@@ -209,7 +209,7 @@ This is the Gazebo URDF model for the Intel RealSense D435i camera
           <update_rate>${gyro_fps}</update_rate>
           <topic>${camera_name}/gyro/sample</topic>
           <plugin name="${topics_ns}_gyro_plugin" filename="librealsense_gazebo_gyro_sensor.so">
-            <topicName>${camera_name}/gyro/sample</topicName>
+            <topicName>${topics_ns}/gyro/sample</topicName>
             <bodyName>${camera_name}_link</bodyName>
             <updateRateHZ>${gyro_fps}</updateRateHZ>
             <gaussianNoise>0.1</gaussianNoise>
