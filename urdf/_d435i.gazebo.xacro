@@ -251,16 +251,13 @@ This is the Gazebo URDF model for the Intel RealSense D435i camera
         </xacro:if>
         <xacro:unless value="${align_depth}">
         	<depthUpdateRate>${depth_fps}</depthUpdateRate>
-      	  <depthTopicName>depth/image_rect_raw</depthTopicName>
-      	  <depthCameraInfoTopicName>depth/camera_info</depthCameraInfoTopicName>
-        	<depthOpticalframeName>${depth_optical_frame}</depthOpticalframeName>
         </xacro:unless>
         <xacro:if value="${align_depth}">
         	<depthUpdateRate>${color_fps}</depthUpdateRate>
-      	  <depthTopicName>aligned_depth_to_color/image_raw</depthTopicName>
-      	  <depthCameraInfoTopicName>aligned_depth_to_color/camera_info</depthCameraInfoTopicName>
-      	  <depthOpticalframeName>${color_optical_frame}</depthOpticalframeName>
         </xacro:if>
+        <depthTopicName>depth/image_rect_raw</depthTopicName>
+        <depthCameraInfoTopicName>depth/camera_info</depthCameraInfoTopicName>
+        <depthOpticalframeName>${depth_optical_frame}</depthOpticalframeName>
 
         <!-- Pointlcloud settings -->
       	<pointCloud>${enable_pointCloud}</pointCloud>
