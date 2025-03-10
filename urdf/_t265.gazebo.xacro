@@ -57,6 +57,7 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
           <image>
             <width>${fisheye_width}</width>
             <height>${fisheye_height}</height>
+            <format>L8</format>
           </image>
           <clip>
             <near>0.2</near>
@@ -117,6 +118,7 @@ This is the Gazebo URDF model for the Intel RealSense T265 camera
           <image>
             <width>${fisheye_width}</width>
             <height>${fisheye_height}</height>
+            <format>L8</format>
           </image>
           <clip>
             <near>0.1</near>
